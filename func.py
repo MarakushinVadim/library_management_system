@@ -10,6 +10,7 @@ class Book:
         self.status = status
 
     def get_id(self):
+        """Метод присваивает UUID экземпляру класса"""
         random_id = uuid.uuid4()
         self.id = random_id
 
@@ -18,12 +19,14 @@ class Book:
 
 
 def save_json(obj_list):
+    """Функция сорхраняет данные в JSON файл по завершении сеанса"""
     with open('data.json', 'w', encoding='utf-8') as f:
         for obj in obj_list:
             f.write(f'{obj.id},{obj.title},{obj.author},{obj.year},{obj.status} \n')
 
 
 def load_json():
+    """Функция загружает данные из JSON файла в начале сеанса"""
     data = []
     with open('data.json', 'r', encoding='utf-8') as f:
         for line in f:
@@ -37,12 +40,14 @@ def load_json():
 
 
 def create_book(title, author, year):
+    """Функция создает экземпляр класса Book"""
     book = Book(title, author, year)
     book.get_id()
     return book
 
 
 def delete_book(data, id):
+    """Функция для удаления обьекта класса"""
     obj_to_remove = None
     for obj in data:
         if obj.id == id:
@@ -55,6 +60,7 @@ def delete_book(data, id):
 
 
 def search_by_title(data, title):
+    """Функция для поиска по названию"""
     searching_obj = None
     for obj in data:
         if obj.title.lower() == title.lower():
@@ -65,6 +71,7 @@ def search_by_title(data, title):
 
 
 def search_by_author(data, author):
+    """Функция для поиска по автору"""
     searching_obj = None
     for obj in data:
         if obj.author.lower() == author.lower():
@@ -75,6 +82,7 @@ def search_by_author(data, author):
 
 
 def search_by_year(data, year):
+    """Функция для поиска по году"""
     searching_obj = None
     for obj in data:
         if obj.year.lower() == year.lower():
@@ -85,6 +93,7 @@ def search_by_year(data, year):
 
 
 def books_list(data):
+    """Функция для просмотра списка книг"""
     for obj in data:
         if obj:
             print(obj)
@@ -93,6 +102,7 @@ def books_list(data):
 
 
 def change_status(data, id):
+    """Функция для смены статуса книги"""
     searching_obj = None
     for obj in data:
         if obj.id == id:
